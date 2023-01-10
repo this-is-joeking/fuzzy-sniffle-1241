@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dish, type: :model do
+RSpec.describe 'chef ingredients show page' do
   before(:each) do
     @chef1 = Chef.create!(name: 'Bobby Ramsey')
     @dish1 = @chef1.dishes.create!(name: 'Mac & Steeze', description: 'Mac and chz with more steeze.')
@@ -11,23 +11,23 @@ RSpec.describe Dish, type: :model do
     @ingredient3 = @dish1.ingredients.create!(name: 'Hot Red Pepper Flakes', calories: 2)
     @ingredient4 = @dish1.ingredients.create!(name: 'Steeze', calories: 0)
     DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient1.id)
-
-  end
-  describe "validations" do
-    it {should validate_presence_of :name}
-    it {should validate_presence_of :description}
-  end
-  describe "relationships" do
-    it {should belong_to :chef}
-    it {should have_many :dish_ingredients}
-    it {should have_many(:ingredients).through(:dish_ingredients)}
   end
 
-  describe '#total_calories' do
-    it 'returns the total amount of calories for a dish' do
-      expect(@dish1.total_calories).to eq(572)
-      expect(@dish2.total_calories).to eq(225)
-      expect(@dish3.total_calories).to eq(0)
-    end
+  xit 'is linked to from the chefs show page' do
+    visit chef_path(@chef1)
+    click_link "View #{@chef1.name}'s Ingredients"
+
+    expect(current_path).to eq()
   end
 end
+
+# Story 3 of 3
+# ```
+# As a visitor
+# When I visit a chef's show page
+# I see a link to view a list of all ingredients that this chef uses in their dishes.
+# When I click on that link
+# I'm taken to a chef's ingredients index page
+# and I can see a unique list of names of all the ingredients that this chef uses.
+# ```
+ 

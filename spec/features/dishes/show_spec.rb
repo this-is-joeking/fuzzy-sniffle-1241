@@ -8,7 +8,7 @@ RSpec.describe 'dish show page' do
     @dish1 = @chef1.dishes.create!(name: 'Mac & Steeze', description: 'Mac and chz with more steeze.')
     @ingredient1 = @dish1.ingredients.create!(name: 'macaroni elbow noodles', calories: 225)
     @ingredient2 = @dish1.ingredients.create!(name: 'Velveeta Sauce', calories: 345)
-    @ingredient3 = @dish1.ingredients.create!(name: 'Hor Red Pepper Flakes', calories: 2)
+    @ingredient3 = @dish1.ingredients.create!(name: 'Hot Red Pepper Flakes', calories: 2)
     @ingredient4 = @dish1.ingredients.create!(name: 'Steeze', calories: 0)
   end
 
@@ -44,11 +44,3 @@ RSpec.describe 'dish show page' do
     expect(page).to have_content("Created by Chef #{@chef1.name}")
   end
 end
-
-
-# As a visitor
-# When I visit a dish's show page
-# I see the dish’s name and description
-# And I see a list of ingredients for that dish
-# and a total calorie count for that dish
-# And I see the chef's name.
