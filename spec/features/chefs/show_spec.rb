@@ -41,5 +41,15 @@ RSpec.describe 'chef show page' do
     expect(current_path).to eq(chef_path(@chef1))
     expect(page).to have_content("That is not a valid dish id")
   end
+
+  it 'lists the chefs top 3 ingredients' do
+    visit chef_path(@chef1)
+
+    within '#top3' do
+      expect(page).to have_content(@ingredient1.name)
+      expect(page).to have_content(@ingredient2.name)
+      expect(page).to have_content(@ingredient3.name)
+    end
+  end
 end
 

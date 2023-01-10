@@ -7,4 +7,8 @@ class Chef < ApplicationRecord
   def uniq_ingredients
     self.ingredients.distinct
   end
+
+  def top_3_ingredients
+    self.ingredients.select('ingredients.*, count(ingredients) as times_used').group(:id).order(times_used: :desc).limit(3)
+  end
 end

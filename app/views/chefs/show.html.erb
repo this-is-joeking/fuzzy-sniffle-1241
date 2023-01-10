@@ -18,3 +18,10 @@
 <br>
 <%= button_to "View #{@chef.name}'s Ingredients", chef_ingredients_path(@chef), method: :get %>
 
+<h4>3 most popular ingredients in these recipes:</h4>
+<ol id="top3">
+  <% @chef.top_3_ingredients.each do |ingredient| %>
+    <li><%= ingredient.name %></li>
+  <% end %>
+</ol>
+
