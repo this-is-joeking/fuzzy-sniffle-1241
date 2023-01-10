@@ -10,14 +10,26 @@ RSpec.describe 'chef ingredients show page' do
     @ingredient2 = @dish1.ingredients.create!(name: 'Velveeta Sauce', calories: 345)
     @ingredient3 = @dish1.ingredients.create!(name: 'Hot Red Pepper Flakes', calories: 2)
     @ingredient4 = @dish1.ingredients.create!(name: 'Steeze', calories: 0)
+    @ingredient5 = Ingredient.create!(name: 'Not here', calories: 100)
     DishIngredient.create!(dish_id: @dish2.id, ingredient_id: @ingredient1.id)
   end
 
-  xit 'is linked to from the chefs show page' do
+  it 'is linked to from the chefs show page' do
     visit chef_path(@chef1)
-    click_link "View #{@chef1.name}'s Ingredients"
+    click_button "View #{@chef1.name}'s Ingredients"
 
-    expect(current_path).to eq()
+    expect(current_path).to eq(chef_ingredients_path(@chef1))
+  end
+
+  it 'lists all of the unique ingredients the chef uses' do
+    visit chef_ingredients_path(@chef1)
+    
+    expect(page).to have_content(@chef1.name)
+    expect(page).to have_content(@ingredient1.name).once
+    expect(page).to have_content(@ingredient2.name).once
+    expect(page).to have_content(@ingredient3.name).once
+    expect(page).to have_content(@ingredient4.name).once
+    expect(page).to_not have_content(@ingredient5.name)
   end
 end
 

@@ -4,4 +4,7 @@ class Chef < ApplicationRecord
   has_many :dish_ingredients, through: :dishes
   has_many :ingredients, through: :dish_ingredients
 
+  def uniq_ingredients
+    self.ingredients.distinct
+  end
 end

@@ -15,4 +15,6 @@
   <%= form.submit 'Submit' %>
   </p>
 <% end %>
+<br>
+<%= button_to "View #{@chef.name}'s Ingredients", chef_ingredients_path(@chef), method: :get %>
 
