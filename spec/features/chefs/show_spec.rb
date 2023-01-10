@@ -29,8 +29,17 @@ RSpec.describe 'chef show page' do
 
     fill_in :dish_id, with: @dish3.id
     click_button "Submit"
+    expect(current_path).to eq(chef_path(@chef1))
+  end
+
+  it 'redirects back to current page and provides error message if dish id is invalid' do
+    visit chef_path(@chef1)
+
+    fill_in :dish_id, with: 1
+    click_button "Submit"
 
     expect(current_path).to eq(chef_path(@chef1))
+    expect(page).to have_content("That is not a valid dish id")
   end
 end
 

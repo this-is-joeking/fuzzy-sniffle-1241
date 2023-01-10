@@ -5,9 +5,15 @@ class DishesController < ApplicationController
   end
 
   def update
-    dish = Dish.find(params[:dish_id])
-    dish.update(dish_params)
-    redirect_to chef_path(params[:chef_id])
+    if Dish.where(id: params[:dish_id]).empty?
+      redirect_to chef_path(params[:chef_id])
+      flash[:error] = "That is not a valid dish id"
+
+    else
+      dish = Dish.find(params[:dish_id])
+      dish.update(dish_params)
+      redirect_to chef_path(params[:chef_id])
+    end
   end
 
   private
